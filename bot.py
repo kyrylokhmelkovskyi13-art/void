@@ -113,7 +113,10 @@ async def on_ready():
 
 @bot.slash_command(name="void", description="VOID clan management")
 async def void_root(inter):
-    await inter.response.send_message("VOID Manager is online.", ephemeral=True)
+    # Disnake invokes the parent callback before a group subcommand.
+    # Only answer when the user ran bare /void with no subcommand.
+    if not inter.data.options:
+        await inter.response.send_message("VOID Manager is online.", ephemeral=True)
 
 @void_root.sub_command(name="publish", description="Publish a VOID information section")
 async def publish(inter, section: str = commands.Param(choices=["rules","tryouts","requirements","checks","roster","boosts"])):
