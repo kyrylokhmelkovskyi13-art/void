@@ -15,7 +15,38 @@ DEFAULT_CONFIG = {
     "guild_id": "",
     "channels": {"rules": "", "requirements": "", "checks": "", "roster": "", "boosts": "", "tickets": ""},
     "sections": {
-        "rules": {"title": "VOID Rules", "description": "Welcome to VOID! Read and follow all rules.", "items": []},
+        "rules": {"title": "VOID Rules", "description": "Welcome to VOID! Read and follow all rules. Ignorance is not an excuse.", "items": [
+            "No problematic discussions: politics, religion, hate speech or disrespectful behavior.",
+            "No NSFW or explicit adult content.",
+            "No spamming or repeatedly sending similar messages, emojis or media.",
+            "No racism, discriminatory jokes, media or slurs.",
+            "No ban evasion using alternate accounts.",
+            "No doxxing or sharing personal information without permission.",
+            "No alternate accounts or bots without staff permission.",
+            "Use common sense and act respectfully.",
+            "No harassment, aggressive arguments or unwanted repeated DMs.",
+            "No advertising, self-promotion or inviting members to leave VOID.",
+            "No illegal content or pirated materials.",
+            "No disruptive behavior, begging, impersonation or threats.",
+            "No severe profanity; bypassing words such as tf/lmao are allowed.",
+            "Do not reveal personal information or passwords; use Discord display names.",
+            "Follow staff instructions. Do not ping trial moderators without a valid reason.",
+            "Keep real-life topics out of public chat.",
+            "Speak English only in public chat.",
+            "Do not post in channels restricted by staff.",
+            "Do not ping owners without a valid reason; use a ticket or DM.",
+            "Follow Discord Terms of Service."
+        ]},
+        "tryouts": {"title": "VOID Tryout Rules", "description": "Please read the rules carefully before requesting a tryout match.", "items": [
+            "No aim assist or auto shoot. If using aim assist, set it to 0.5 or lower.",
+            "Minimum level: 100/300+ (confirm exact threshold with staff).",
+            "Minimum rank: Platinum 1+.",
+            "Minimum winrate: 55%.",
+            "DL: Assault Rifle, Handgun, Fists and Grenade only.",
+            "SDL: Sniper, Handgun, Fists and Grenade only.",
+            "CL: Any weapon except Flamethrower, Riot+Shorty, Grenade Launcher, Distortion, RPG and Minigun.",
+            "Autopass: over 80% winrate, over Level 350, Onyx rank or known community creator; screenshot proof required."
+        ]},
         "requirements": {"title": "VOID Requirements", "description": "VOID clan joining requirements.", "items": ["Minimum level: 100", "Platinum 2+", "R3+ (RCL)", "1,200 wins", "65% winrate", "Good movement and aim", "You must meet at least 4 of 6 requirements."]},
         "checks": {"title": "VOID Checks", "description": "Information about clan checks. Edit this text in BotControl.", "items": []},
         "roster": {"title": "VOID Roster", "description": "VOID clan roster.", "items": []},
@@ -66,7 +97,7 @@ async def void_root(inter):
     await inter.response.send_message("VOID Manager is online.", ephemeral=True)
 
 @void_root.sub_command(name="publish", description="Publish a VOID information section")
-async def publish(inter, section: str = commands.Param(choices=["rules","requirements","checks","roster","boosts"])):
+async def publish(inter, section: str = commands.Param(choices=["rules","tryouts","requirements","checks","roster","boosts"])):
     if not is_owner(inter):
         return await inter.response.send_message("Administrator permission required.", ephemeral=True)
     channel_id = config["channels"].get(section)
@@ -77,7 +108,7 @@ async def publish(inter, section: str = commands.Param(choices=["rules","require
     await inter.response.send_message(f"Published VOID {section}.", ephemeral=True)
 
 @void_root.sub_command(name="preview", description="Preview a VOID information section")
-async def preview(inter, section: str = commands.Param(choices=["rules","requirements","checks","roster","boosts"])):
+async def preview(inter, section: str = commands.Param(choices=["rules","tryouts","requirements","checks","roster","boosts"])):
     if not is_owner(inter):
         return await inter.response.send_message("Administrator permission required.", ephemeral=True)
     await inter.response.send_message(embed=make_embed(config["sections"][section]), ephemeral=True)
