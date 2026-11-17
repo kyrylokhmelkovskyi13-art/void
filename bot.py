@@ -119,26 +119,26 @@ async def void_root(inter):
         await inter.response.send_message("VOID Manager is online.", ephemeral=True)
 
 @void_root.sub_command(name="publish", description="Publish a VOID information section")
-async def publish(inter, section: str = commands.Param(choices=["rules","tryouts","requirements","checks","roster","boosts"])):
+async def publish(
+    inter,
+    section: str = commands.Param(choices=["rules","tryouts","requirements","checks","roster","boosts"]),
+    channel: disnake.TextChannel = commands.Param(description="Channel where the section will be published"),
+):
     if not is_owner(inter):
         return await inter.response.send_message("Administrator permission required.", ephemeral=True)
-    channel_id = config["channels"].get(section)
-    channel = inter.guild.get_channel(int(channel_id)) if str(channel_id).isdigit() else None
-    if channel is None:
-        return await inter.response.send_message(f"Set the {section} channel ID in BotControl first.", ephemeral=True)
     await channel.send(embed=make_embed(config["sections"][section]))
-    await inter.response.send_message(f"Published VOID {section}.", ephemeral=True)
+    await inter.response.send_message(f"Published VOID {section} in {channel.mention}.", ephemeral=True)
 
 @bot.slash_command(name="void_publish", description="Publish a VOID information section")
-async def void_publish(inter, section: str = commands.Param(choices=["rules","tryouts","requirements","checks","roster","boosts"])):
+async def void_publish(
+    inter,
+    section: str = commands.Param(choices=["rules","tryouts","requirements","checks","roster","boosts"]),
+    channel: disnake.TextChannel = commands.Param(description="Channel where the section will be published"),
+):
     if not is_owner(inter):
         return await inter.response.send_message("Administrator permission required.", ephemeral=True)
-    channel_id = config["channels"].get(section)
-    channel = inter.guild.get_channel(int(channel_id)) if inter.guild and str(channel_id).isdigit() else None
-    if channel is None:
-        return await inter.response.send_message(f"Set the {section} channel ID in BotControl first.", ephemeral=True)
     await channel.send(embed=make_embed(config["sections"][section]))
-    await inter.response.send_message(f"Published VOID {section}.", ephemeral=True)
+    await inter.response.send_message(f"Published VOID {section} in {channel.mention}.", ephemeral=True)
 
 
 @bot.slash_command(name="void_preview", description="Preview a VOID information section")
