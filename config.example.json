@@ -1,0 +1,51 @@
+{
+  "guild_id": "",
+  "channels": {
+    "rules": "",
+    "requirements": "",
+    "checks": "",
+    "roster": "",
+    "boosts": "",
+    "tickets": ""
+  },
+  "sections": {
+    "rules": {
+      "title": "VOID Rules",
+      "description": "Welcome to VOID! Read and follow all rules.",
+      "items": []
+    },
+    "requirements": {
+      "title": "VOID Requirements",
+      "description": "VOID clan joining requirements.",
+      "items": [
+        "Minimum level: 100",
+        "Platinum 2+",
+        "R3+ (RCL)",
+        "1,200 wins",
+        "65% winrate",
+        "Good movement and aim",
+        "You must meet at least 4 of 6 requirements."
+      ]
+    },
+    "checks": {
+      "title": "VOID Checks",
+      "description": "Information about clan checks. Edit this text in BotControl.",
+      "items": []
+    },
+    "roster": {
+      "title": "VOID Roster",
+      "description": "VOID clan roster.",
+      "items": []
+    },
+    "boosts": {
+      "title": "VOID Boost Perks",
+      "description": "Boost our server to unlock exclusive perks and rewards! Your support helps the VOID community grow.",
+      "items": [
+        "💎 1 BOOST: Extra Entries in giveaways; Bypass Slowmode in chat channels; Ability to change your nickname",
+        "🔥 2 BOOSTS: 1 Custom Emoji; Custom Role (custom color & emoji next to name); 1 Custom Sticker",
+        "⚠️ Perks will be lost if you leave or unboost the server (added emoji/sticker will stay).",
+        "🎟️ HOW TO CLAIM: Open a ticket in #tickets to claim your perks!"
+      ]
+    }
+  }
+}
