@@ -13,7 +13,7 @@ CONFIG_PATH = Path(os.getenv("VOID_CONFIG_PATH", "config.json"))
 
 DEFAULT_CONFIG = {
     "guild_id": "",
-    "channels": {"rules": "", "requirements": "", "checks": "", "roster": "", "boosts": "", "tickets": ""},
+    "channels": {"rules": "", "tryouts": "", "requirements": "", "checks": "", "roster": "", "boosts": "", "tickets": ""},
     "sections": {
         "rules": {"title": "VOID Rules", "description": "Welcome to VOID! Read and follow all rules. Ignorance is not an excuse.", "items": [
             "No problematic discussions: politics, religion, hate speech or disrespectful behavior.",
