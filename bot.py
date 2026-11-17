@@ -74,7 +74,8 @@ def save_config():
 intents = disnake.Intents.default()
 intents.guilds = True
 intents.members = True
-bot = commands.InteractionBot(intents=intents, test_guilds=[1563860488243249253])
+GUILD_ID = 1563860488243249253
+bot = commands.InteractionBot(intents=intents, test_guilds=[GUILD_ID])
 
 def is_owner(inter):
     return inter.guild is not None and (inter.author.guild_permissions.administrator or inter.author.id == inter.guild.owner_id)
@@ -92,6 +93,15 @@ def make_embed(section):
     embed.set_footer(text="VOID Clan • Thank you.")
     return embed
 
+@bot.event
+async def on_ready():
+    command_names = [command.name for command in bot.slash_commands]
+    print(f"[VOID] Connected as {bot.user} (ID: {bot.user.id})")
+    print(f"[VOID] Guild command target: {GUILD_ID}")
+    print(f"[VOID] Local slash commands loaded: {command_names}")
+    print("[VOID] Disnake InteractionBot synchronizes application commands during startup.")
+
+
 @bot.slash_command(name="void", description="VOID clan management")
 async def void_root(inter):
     await inter.response.send_message("VOID Manager is online.", ephemeral=True)
@@ -106,6 +116,25 @@ async def publish(inter, section: str = commands.Param(choices=["rules","tryouts
         return await inter.response.send_message(f"Set the {section} channel ID in BotControl first.", ephemeral=True)
     await channel.send(embed=make_embed(config["sections"][section]))
     await inter.response.send_message(f"Published VOID {section}.", ephemeral=True)
+
+@bot.slash_command(name="void_publish", description="Publish a VOID information section")
+async def void_publish(inter, section: str = commands.Param(choices=["rules","tryouts","requirements","checks","roster","boosts"])):
+    if not is_owner(inter):
+        return await inter.response.send_message("Administrator permission required.", ephemeral=True)
+    channel_id = config["channels"].get(section)
+    channel = inter.guild.get_channel(int(channel_id)) if inter.guild and str(channel_id).isdigit() else None
+    if channel is None:
+        return await inter.response.send_message(f"Set the {section} channel ID in BotControl first.", ephemeral=True)
+    await channel.send(embed=make_embed(config["sections"][section]))
+    await inter.response.send_message(f"Published VOID {section}.", ephemeral=True)
+
+
+@bot.slash_command(name="void_preview", description="Preview a VOID information section")
+async def void_preview(inter, section: str = commands.Param(choices=["rules","tryouts","requirements","checks","roster","boosts"])):
+    if not is_owner(inter):
+        return await inter.response.send_message("Administrator permission required.", ephemeral=True)
+    await inter.response.send_message(embed=make_embed(config["sections"][section]), ephemeral=True)
+
 
 @void_root.sub_command(name="preview", description="Preview a VOID information section")
 async def preview(inter, section: str = commands.Param(choices=["rules","tryouts","requirements","checks","roster","boosts"])):
