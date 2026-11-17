@@ -4,7 +4,7 @@ A separate Disnake bot for the VOID clan, with an authenticated control API for 
 
 ## Features
 - Slash commands: `/void preview` and `/void publish`.
-- Sections: rules, requirements, checks, roster and boost perks.
+- Sections: rules, tryouts, requirements, checks, roster and boost perks.
 - Owner/admin-only publishing.
 - Authenticated `GET/PUT /control/config` API for BotControl.
 - JSON config file; do not commit real tokens or secrets.
@@ -19,4 +19,4 @@ A separate Disnake bot for the VOID clan, with an authenticated control API for 
 ## BotControl connection
 Add a VOID service to BotControl's `BOT_SERVICES` environment variable using the Render service ID and public control URL. Configure the same `BOTCONTROL_SHARED_SECRET` on both services.
 
-The website UI still needs its VOID Clan Manager editor; this repository provides the bot-side API and commands.
+BotControl includes a VOID Clan Manager editor page. Add the VOID service to the server-side BOT_SERVICES allowlist before using it.
