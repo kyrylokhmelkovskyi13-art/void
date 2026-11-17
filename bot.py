@@ -78,7 +78,7 @@ GUILD_ID = 1563860488243249253
 bot = commands.InteractionBot(
     intents=intents,
     test_guilds=[GUILD_ID],
-    sync_commands_debug=True,
+    command_sync_flags=commands.CommandSyncFlags(sync_commands_debug=True),
 )
 
 def is_owner(inter):
@@ -97,13 +97,18 @@ def make_embed(section):
     embed.set_footer(text="VOID Clan • Thank you.")
     return embed
 
+http_runner = None
+
 @bot.event
 async def on_ready():
+    global http_runner
     command_names = [command.name for command in bot.slash_commands]
-    print(f"[VOID] Connected as {bot.user} (ID: {bot.user.id})")
-    print(f"[VOID] Guild command target: {GUILD_ID}")
-    print(f"[VOID] Local slash commands loaded: {command_names}")
-    print("[VOID] Disnake InteractionBot synchronizes application commands during startup.")
+    print(f"[VOID] Connected as {bot.user} (ID: {bot.user.id})", flush=True)
+    print(f"[VOID] Guild command target: {GUILD_ID}", flush=True)
+    print(f"[VOID] Local slash commands loaded: {command_names}", flush=True)
+    if http_runner is None:
+        http_runner = await start_http()
+        print(f"[VOID] HTTP health server started on port {PORT}", flush=True)
 
 
 @bot.slash_command(name="void", description="VOID clan management")
@@ -193,14 +198,7 @@ async def start_http():
     await site.start()
     return runner
 
-async def main():
+if __name__ == "__main__":
     if not TOKEN:
         raise RuntimeError("DISCORD_TOKEN is required.")
-    runner = await start_http()
-    try:
-        await bot.start(TOKEN)
-    finally:
-        await runner.cleanup()
-
-if __name__ == "__main__":
-    asyncio.run(main())
+    bot.run(TOKEN)
