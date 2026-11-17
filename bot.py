@@ -75,7 +75,11 @@ intents = disnake.Intents.default()
 intents.guilds = True
 intents.members = True
 GUILD_ID = 1563860488243249253
-bot = commands.InteractionBot(intents=intents, test_guilds=[GUILD_ID])
+bot = commands.InteractionBot(
+    intents=intents,
+    test_guilds=[GUILD_ID],
+    sync_commands_debug=True,
+)
 
 def is_owner(inter):
     return inter.guild is not None and (inter.author.guild_permissions.administrator or inter.author.id == inter.guild.owner_id)
