@@ -85,16 +85,36 @@ def is_owner(inter):
     return inter.guild is not None and (inter.author.guild_permissions.administrator or inter.author.id == inter.guild.owner_id)
 
 def make_embed(section):
-    embed = disnake.Embed(
-        title=str(section.get("title", "VOID"))[:256],
-        description=str(section.get("description", ""))[:4000],
-        color=0x7864E8
-    )
+    title = str(section.get("title", "VOID")).strip()[:256]
+    intro = str(section.get("description", "")).strip()
     items = section.get("items", [])
+
+    # Use the embed description for the full content instead of a 1024-char field.
+    # Discord controls font size, but Markdown headings, bold labels and spacing
+    # make the announcement easier to scan.
+    parts = []
+    if intro:
+        parts.append(f"**{intro}**")
+
     if items:
-        body = "\n".join("• " + str(x) for x in items)
-        embed.add_field(name="Information", value=body[:1024], inline=False)
-    embed.set_footer(text="VOID Clan • Thank you.")
+        parts.append("━━━━━━━━━━━━━━━━━━━━")
+        parts.append("**📌  IMPORTANT INFORMATION**")
+        parts.append("")
+        parts.extend(
+            f"**{index:02}.** {str(item).strip()}"
+            for index, item in enumerate(items, start=1)
+        )
+
+    description = "\n".join(parts).strip() or "No information has been added yet."
+    description = description[:4096]
+
+    embed = disnake.Embed(
+        title=f"✦  {title}  ✦"[:256],
+        description=description,
+        color=0x8B5CF6
+    )
+    embed.set_author(name="VOID  •  OFFICIAL INFORMATION")
+    embed.set_footer(text="VOID CLAN  •  Please read carefully")
     return embed
 
 http_runner = None
