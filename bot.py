@@ -74,7 +74,7 @@ def save_config():
 intents = disnake.Intents.default()
 intents.guilds = True
 intents.members = True
-bot = commands.InteractionBot(intents=intents)
+bot = commands.InteractionBot(intents=intents, test_guilds=[1563860488243249253])
 
 def is_owner(inter):
     return inter.guild is not None and (inter.author.guild_permissions.administrator or inter.author.id == inter.guild.owner_id)
