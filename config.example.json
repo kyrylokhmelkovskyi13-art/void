@@ -12,7 +12,28 @@
     "rules": {
       "title": "VOID Rules",
       "description": "Welcome to VOID! Read and follow all rules.",
-      "items": []
+      "items": [
+        "No problematic discussions: politics, religion, hate speech or disrespectful behavior.",
+        "No NSFW or explicit adult content.",
+        "No spamming or repeated similar messages, emojis or media.",
+        "No racism or discriminatory content.",
+        "No ban evasion using alternate accounts.",
+        "No doxxing or sharing personal information without permission.",
+        "No alternate accounts or bots without staff permission.",
+        "Use common sense and act respectfully.",
+        "No harassment or unwanted repeated DMs.",
+        "No advertising, self-promotion or inviting members to leave VOID.",
+        "No illegal content or pirated materials.",
+        "No disruptive behavior, begging, impersonation or threats.",
+        "No severe profanity; bypassing words such as tf/lmao are allowed.",
+        "Do not reveal personal information or passwords; use Discord display names.",
+        "Follow staff instructions; do not ping trial moderators without a valid reason.",
+        "Keep real-life topics out of public chat.",
+        "Speak English only in public chat.",
+        "Do not post in channels restricted by staff.",
+        "Do not ping owners without a valid reason; use a ticket or DM.",
+        "Follow Discord Terms of Service."
+      ]
     },
     "requirements": {
       "title": "VOID Requirements",
@@ -45,6 +66,20 @@
         "🔥 2 BOOSTS: 1 Custom Emoji; Custom Role (custom color & emoji next to name); 1 Custom Sticker",
         "⚠️ Perks will be lost if you leave or unboost the server (added emoji/sticker will stay).",
         "🎟️ HOW TO CLAIM: Open a ticket in #tickets to claim your perks!"
+      ]
+    },
+    "tryouts": {
+      "title": "VOID Tryout Rules",
+      "description": "Please read the rules carefully before requesting a tryout match.",
+      "items": [
+        "No aim assist or auto shoot. If using aim assist, set it to 0.5 or lower.",
+        "Minimum level: 100/300+ (confirm exact threshold with staff).",
+        "Minimum rank: Platinum 1+.",
+        "Minimum winrate: 55%.",
+        "DL: Assault Rifle, Handgun, Fists and Grenade only.",
+        "SDL: Sniper, Handgun, Fists and Grenade only.",
+        "CL: Any weapon except Flamethrower, Riot+Shorty, Grenade Launcher, Distortion, RPG and Minigun.",
+        "Autopass: over 80% winrate, over Level 350, Onyx rank or known community creator; screenshot proof required."
       ]
     }
   }
